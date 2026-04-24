@@ -83,3 +83,119 @@ if __name__ == main():
 
 ![Objeto RAM](img/objetoRam.png "Objeto RAM")
 
+## Composición
+
+- Consiste en la creación de nuevas clases a partir de otras clases ya existentes que actúan como elementos compositores de la nueva.
+- Las clases existentes serán atributos de la nueva clase.
+
+### Ejemplo
+
+- Una coordenada en dos dimensiones está compuesta por dos valores, el valor en el eje de las X y el valor en el eje de las Y.  Esto podría ser una clase
+- Un cuadrado está compuesto por 4 coordenadas que son los cuatro vértices. Esto podría ser una clase que está compuesta por cuatro clases del objeto coordenada.
+
+### Código Python
+```Python
+class Coordenada:
+    # Metodo constructor
+    def __init__(self, x, y):
+        self.X = x
+        self.Y = y
+
+    def mostrarCoordenada(self):
+        print("(",self.X,",",self.Y, ")")
+
+class Cuadrado:
+    # Método constructor
+    def __init__(self, v1, v2, v3, v4):
+        self.V1 = v1
+        self.V2 = v2
+        self.V3 = v3
+        self.V4 = v4
+
+    def mostrarVertices(self):
+        print("El cuadrado está compuesto por los siguientes vértices:")
+        self.V1.mostrarCoordenada()
+        self.V2.mostrarCoordenada()
+        self.V3.mostrarCoordenada()
+        self.V4.mostrarCoordenada()
+```
+## Representación en RAM de la composicion
+
+![Objeto RAM](img/composicion_poo_v2.png "Objeto RAM")
+
+## Encapsulación
+
+- Uno de los objetivos que tiene la POO es proteger los datos de acceso o usos no contralados, y ésto es lo que se conoce como **encapsulación**.
+- Los datos (atributos) que componen una clase pueden ser de dos tipos:
+    - **Públicos:** los datos son accesibles sin control, es decir, los datos pueden ser usados sin ningún tipo de mecanismo que protega ante usos no autorizados o indebidos.
+    - **Privados:** los datos no pueden ser accedidos sin control y para acceder a ellos se deberá implementar un método que acceda a ellos.  De ésta manera, los datos únicamente serán accedidos directamente por la propia clase.
+- La encapsulación también puede realizarse sobre los métodos.
+- La definición de atributos privados se realiza incluyendo los caracteres "__" (dos guiones de piso) entre la palabra *self* y el nombre del atributo.
+
+### Ejemplo
+
+### Código Python
+```Python
+class Coordenada:
+    # Metodo constructor
+    def __init__(self, x, y):
+        self.__X = x
+        self.__Y = y
+
+    # Metodos de acceso
+    def getX(self):
+        return self.__X
+
+    def setX(self, x):
+        self.__X = x
+
+    def getY(self):
+        return self.__Y
+
+    def setY(self, y):
+        self.__Y = y
+
+    def mostrarCoordenada(self):
+        print("(",self.__X,",",self.__Y, ")")
+
+class Cuadrado:
+    # Método constructor
+    def __init__(self, v1, v2, v3, v4):
+        self.V1 = v1
+        self.V2 = v2
+        self.V3 = v3
+        self.V4 = v4
+
+    def mostrarVertices(self):
+        print("El cuadrado está compuesto por los siguientes vértices:")
+        self.V1.mostrarCoordenada()
+        self.V2.mostrarCoordenada()
+        self.V3.mostrarCoordenada()
+        self.V4.mostrarCoordenada()
+```
+
+## Herencia
+- Permite la reutilización de código.
+- Consiste en la definición de una clase utilizando como base una clase ya existente.
+- La nueva clase derivada tendrá todas las caracteristicas de la clase base y ampliará el concepto de esta, es decir, tendrá todos los atributos y métodos de la clase base.
+- Significa que entre dos clases existe una relación del tipo "es un".
+- La herencia en Python se especifica de la siguiente manera: ```class NombreClase(ClaseBase):```
+- Ejemplo:
+    - Pensemos en una persona como una clase, la persona tendría una serie de atributos como pueden ser el nombre, los apellidos, la edad, etc.  Esas características de una persona serían compartidas por todas aquellas clases hijas como pueden ser alumno y profesor.  Es decir, alumno y profesor heredarían las propiedades de la clase persona y tendrían sus propias propiedades, diferentes entre ellas, como por ejemplo el curso en el que está el alumno y el horario de tutorias del profesor.
+
+    - Clase base: Persona
+        - Atributos:
+            - Nombre
+            - Apellidos
+            - Edad
+
+    - Clase derivada: Alumno
+        - Atributos:
+            - Curso
+            - Asignaturas
+    
+    - Clase derivada: Profesor
+        - Atributos:
+            - Antigüedad
+            - Tutorias
+            - Teléfono
